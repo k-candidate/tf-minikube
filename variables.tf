@@ -62,6 +62,12 @@ variable "argocd_chart_version" {
   default     = "9.4.15"
 }
 
+variable "argocd_apps_chart_version" {
+  description = "Version of the companion argocd-apps Helm chart used for optional GitOps bootstrap."
+  type        = string
+  default     = "2.0.4"
+}
+
 variable "gitops_bootstrap_enabled" {
   description = "Whether Terraform should create the root Argo CD Application that bootstraps the GitOps repo."
   type        = bool
