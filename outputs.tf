@@ -22,3 +22,9 @@ output "argocd_initial_admin_secret_name" {
   description = "Secret that stores the initial Argo CD admin password."
   value       = "argocd-initial-admin-secret"
 }
+
+output "gitops_root_application_name" {
+  description = "Name of the root Argo CD Application Terraform bootstraps when enabled."
+  value       = var.gitops_bootstrap_enabled ? var.gitops_root_application_name : null
+}
+

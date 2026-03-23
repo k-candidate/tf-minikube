@@ -61,3 +61,34 @@ variable "argocd_chart_version" {
   type        = string
   default     = "9.4.15"
 }
+
+variable "gitops_bootstrap_enabled" {
+  description = "Whether Terraform should create the root Argo CD Application that bootstraps the GitOps repo."
+  type        = bool
+  default     = true
+}
+
+variable "gitops_root_application_name" {
+  description = "Name of the root Argo CD Application Terraform creates for GitOps bootstrap."
+  type        = string
+  default     = "minikube-root"
+}
+
+variable "gitops_repo_url" {
+  description = "Git repository URL Argo CD should watch for GitOps application definitions."
+  type        = string
+  default     = "https://github.com/k-candidate/gitops-apps.git"
+}
+
+variable "gitops_target_revision" {
+  description = "Git revision Argo CD should track in the GitOps repo."
+  type        = string
+  default     = "main"
+}
+
+variable "gitops_apps_path" {
+  description = "Path in the GitOps repo that contains the environment application definitions."
+  type        = string
+  default     = "apps/minikube"
+}
+
