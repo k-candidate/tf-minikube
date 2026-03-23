@@ -47,6 +47,7 @@ If you need a larger local cluster, override `minikube_nodes`, `minikube_cpus`, 
 Terraform then creates:
 - the `argocd` namespace
 - an `argocd` Helm release using the official Argo Helm chart
+- optionally, a root Argo CD `Application` that bootstraps the `gitops-apps` repo
 
 The chart version is pinned with `argocd_chart_version` so the repo stays predictable and repeatable.
 This repository currently defaults to Argo CD Helm chart `9.4.15`.
@@ -99,6 +100,10 @@ minikube status -p terraform-provider-minikube
 
 ### Check the cluster
 
+If GitOps bootstrap is enabled, Terraform also creates the root Argo CD application automatically.
+That means you do not need to run a separate manual `kubectl apply` for the bootstrap manifest.
+
+
 ```bash
 kubectl get nodes
 kubectl get pods -n argocd
@@ -129,6 +134,20 @@ The default username is:
 
 ```text
 admin
+```
+
+### Optional GitOps bootstrap
+
+GitOps bootstrap is controlled by:
+- `gitops_bootstrap_enabled`
+
+Default:
+- `true`
+
+If you want a cluster with Argo CD installed but not yet bootstrapped to the GitOps repo, use:
+
+```bash
+terraform apply -var='gitops_bootstrap_enabled=false'
 ```
 
 ### Re-apply after changes
